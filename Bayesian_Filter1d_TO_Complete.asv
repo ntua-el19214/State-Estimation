@@ -9,13 +9,13 @@ pPrior=zeros(N,1);
 x0mean=0;
 x0std =1;
 dx = xValues(2) - xValues(1);
-X_estimates_bayesian = zeros(1,15);
+
 for i=1:N
     pPrior(i) = (1/(2*pi*x0std^2))^0.5  *exp(-(xValues(i)-x0mean)^2/(2*x0std^2));
 end
 
 
-for k=1:15
+for k=1:5
 
     y_meas=y(k);
     %correction step
@@ -28,14 +28,14 @@ for k=1:15
     end
 
     p_posterior = p_posterior_unnormalized/sum(p_posterior_unnormalized)/dx;
-    X_estimates_bayesian(k) = (p_posterior*dx*xValues');
-    maxAxisScale = max(max(pPrior), max(p_posterior));
+
+    maxAxisScale = max(max(pPrior), max())
     figure
     plot(xValues,pPrior, 'LineWidth',1.5)
     hold on
     plot(xValues,p_posterior, 'LineWidth',1.5)
-    quiver(y_meas,0,0,maxAxisScale, 'linewidth',1.5)
-    quiver(x(k),0,0,maxAxisScale, 'linewidth',1.5)
+    quiver(y_meas,0,0,0.5, 'linewidth',1.5)
+    quiver(x(k),0,0,0.5, 'linewidth',1.5)
     legend("Prior", "Posterior", "y Measured", "x Actual")
     grid on
     ylabel('Probability Density')

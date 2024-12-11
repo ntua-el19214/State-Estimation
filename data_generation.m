@@ -1,9 +1,10 @@
+clear
 w_std = sqrt(10);
 v_std = sqrt(1);
 x=randn(1);
 y=[];
 N_steps=15;
-alpha=1;
+alpha=3;
 bet=5;
 
 for k=1:N_steps

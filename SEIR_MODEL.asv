@@ -1,0 +1,34 @@
+I0=0.001*rand(1);
+S=1-I0;
+E=0;
+I=I0;
+
+r1 = 0.1;
+r2 = 0.3; 
+b1 = 0.005;
+b2 = 0.1;
+b3 = 0.05;
+b4 = 0.2;
+dt=1;
+
+
+for k=1:200
+    y(k) = (0.2*E(k)+I(k)) * exp(randn(1)*0.3);
+    mul_dist1 = exp(randn(1)*0.5);
+    mul_dist2 = exp(randn(1)*0.3);
+    mul_dist3 = exp(randn(1)*0.3);
+
+    S(k+1) = S(k)+dt*( (-r1*E(k)*S(k) - r2* I(k) * S(k))*mul_dist1  + b1 * (1-E(k)-I(k)-S(k))*mul_dist2 );
+    E(k+1) = E(k)+dt*( (r1*S(k)*E(k) + r2* I(k) * S(k))*mul_dist1- mul_dist3* (b2+b3) * E(k));
+    I(k+1) = I(k)+dt*mul_dist3*(b2 * E(k)-b4 *I(k));
+    
+end
+
+
+%figure
+%plot(S)
+%hold on
+%plot(I)
+%plot(E)
+%plot(1-S-I-E)
+%plot(y)
